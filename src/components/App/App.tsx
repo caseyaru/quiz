@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
+import questions from '../../utils/questions';
+import Progress from '../Progress/Progress';
+import Result from '../Result/Result';
 
 function App() {
+  const [step, setStep] = useState<number>(0);
+  const [correct, setCorrect] = useState<number>(0);
+  const question = questions[step];
+
+  const onClickVariant = (index: number) => {
+    setStep(step + 1);
+    if (index === question.correct) {
+        setCorrect(correct + 1);
+        console.log(correct);
+    }
+  }
+
+  const resetResults = () => {
+    setStep(0);
+    setCorrect(0);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {step !== questions.length
+          ? <Progress step={step} question={question} onClickVariant={onClickVariant}/>
+          : <Result correct={correct} resetResults={resetResults}/>
+        }
     </div>
   );
 }

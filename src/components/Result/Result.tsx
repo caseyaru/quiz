@@ -1,5 +1,4 @@
 import questions from '../../utils/questions';
-import './Result.scss';
 
 interface ResultProps {
   correct: number,

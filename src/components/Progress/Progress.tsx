@@ -1,5 +1,4 @@
 import React from "react";
-import "./Progress.scss";
 import { Question } from "../../types/question";
 import questions from "../../utils/questions";
 
